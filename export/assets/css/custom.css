@@ -1,0 +1,64 @@
+/* Fullscreen blur overlay */
+
+#egg-overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 999998;
+}
+
+#egg-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* The egg itself */
+
+#egg {
+  position: fixed;
+  top: 75%;
+  left: 55%;
+  width: 500px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  transform-origin: 150px -100px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999999;
+  transition: opacity 0.4s ease;
+}
+
+/* Active egg: fade in + orbit + self-spin */
+
+#egg.active {
+  opacity: 1;
+  animation: egg-orbit 10s linear infinite, egg-spin 10s linear infinite;
+}
+
+/* Orbit around the center of the screen */
+
+@keyframes egg-orbit {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Rocket spinning on its own axis */
+
+@keyframes egg-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+
